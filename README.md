@@ -1,5 +1,7 @@
 # SDLuna
 A SDL2 bind for Lua  
+
+# Note : Alpha Version
   
 ## Environment   
 * C++11  
