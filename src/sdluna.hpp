@@ -12,7 +12,10 @@
 /********************************************************************
 **********************Template specializations***********************
 ********************************************************************/
+#include "types/SDL_bool.hpp"
 #include "types/SDL_Event.hpp"
+#include "types/SDL_Point.hpp"
+#include "types/SDL_Rect.hpp"
 
 
 
