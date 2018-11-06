@@ -12,9 +12,6 @@
 /********************************************************************
 **********************Template specializations***********************
 ********************************************************************/
-#include "types/SDL_Window.hpp"
-#include "types/SDL_Renderer.hpp"
-#include "types/SDL_Texture.hpp"
 #include "types/SDL_Event.hpp"
 
 

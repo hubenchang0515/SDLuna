@@ -3,13 +3,8 @@
 
 /* Write SDL_Event* to Lua */
 template<> 
-inline void luaMagic_write<SDL_Event*>(lua_State* L, SDL_Event* value)
-{
-#ifdef SDLUNA_DEBUG
-	SDL_Log("Write SDL_Event* to Lua : %p \n", value);
-#endif
-	//lua_pushlightuserdata(L, static_cast<void*>(value));
-	
+inline void luaMagic_write(lua_State* L, SDL_Event* value)
+{	
 	/* Create a table to save event */
 	lua_newtable(L);
 	
