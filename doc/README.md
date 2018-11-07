@@ -5,6 +5,6 @@ A SDL2 bind for Lua
 Alpha 0.3
 
 ## API Index
- - [] [SDL Vedio]()
- - [] [SDL Renderer]()
- - [] [SDL Event]()
+ - [ ] [SDL Vedio]()
+ - [ ] [SDL Renderer]()
+ - [ ] [SDL Event]()
