@@ -1,5 +1,5 @@
 local sdl = require("libsdluna")
-local win = sdl.CreateWindow("hello", 100, 100, 210, 210, 0);
+local win = sdl.CreateWindow("hello", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, 210, 210, 0);
 local ren = sdl.CreateRenderer(win, -1, 0);
 
 while sdl.PollEvent()['type'] ~= sdl.EVENT_QUIT do

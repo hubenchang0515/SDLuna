@@ -37,6 +37,10 @@ void SDLuna_VedioBind(lua_State* L)
 	luaMagic::bind(L, "VideoInit", SDL_VideoInit, true);
 	luaMagic::bind(L, "VideoQuit", SDL_VideoQuit, true);
 	
+	/* SDL_WindowPosition */
+	luaMagic::setValue(L, "WINDOWPOS_CENTERED", (int)SDL_WINDOWPOS_CENTERED, true);
+	luaMagic::setValue(L, "WINDOWPOS_UNDEFINED", (int)SDL_WINDOWPOS_UNDEFINED, true);
+	
 	/* SDL_WindowFlags */
 	luaMagic::setValue(L, "WINDOW_BORDERLESS", (int)SDL_WINDOW_BORDERLESS, true);
 	luaMagic::setValue(L, "WINDOW_SHOWN", (int)SDL_WINDOW_SHOWN, true);
