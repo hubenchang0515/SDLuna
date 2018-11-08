@@ -1,8 +1,12 @@
 local sdl = require("libsdluna")
-local win = sdl.CreateWindow("hello", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, 210, 210, 0);
+local win = sdl.CreateWindow("hello", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, 210, 210, sdl.WINDOW_SHOWN);
 local ren = sdl.CreateRenderer(win, -1, 0);
 
-while sdl.PollEvent()['type'] ~= sdl.EVENT_QUIT do
+while true do
+	local event = sdl.PollEvent()
+	if event ~= nil and event['type'] == sdl.EVENT_QUIT then
+		break
+	end
 	-- Clear
 	sdl.SetRenderDrawColor(ren, 0,0,0,255)
 	sdl.RenderClear(ren)
