@@ -3,37 +3,59 @@
 /* Bind Functions */
 void SDLuna_VedioBind(lua_State* L)
 {
-	luaMagic::bind(L, "SDL_CreateWindow", SDL_CreateWindow, true);
-	luaMagic::bind(L, "SDL_DestroyWindow", SDL_DestroyWindow, true);
-	//luaMagic::bind(L, "SDL_GetWindowWMInfo", SDL_GetWindowWMInfo, true);
-	luaMagic::bind(L, "SDL_HideWindow", SDL_HideWindow, true);
-	luaMagic::bind(L, "SDL_IsScreenSaverEnabled", SDL_IsScreenSaverEnabled, true);
-	luaMagic::bind(L, "SDL_MaximizeWindow", SDL_MaximizeWindow, true);
-	luaMagic::bind(L, "SDL_MinimizeWindow", SDL_MinimizeWindow, true);
-	luaMagic::bind(L, "SDL_RaiseWindow", SDL_RaiseWindow, true);
-	luaMagic::bind(L, "SDL_RestoreWindow", SDL_RestoreWindow, true);
-	luaMagic::bind(L, "SDL_SetWindowBordered", SDL_SetWindowBordered, true);
-	luaMagic::bind(L, "SDL_SetWindowBrightness", SDL_SetWindowBrightness, true);
-	luaMagic::bind(L, "SDL_SetWindowData", SDL_SetWindowData, true);
-	luaMagic::bind(L, "SDL_SetWindowDisplayMode", SDL_SetWindowDisplayMode, true);
-	luaMagic::bind(L, "SDL_SetWindowFullscreen", SDL_SetWindowFullscreen, true);
-	luaMagic::bind(L, "SDL_SetWindowGammaRamp", SDL_SetWindowGammaRamp, true);
-	luaMagic::bind(L, "SDL_SetWindowGrab", SDL_SetWindowGrab, true);
-	//luaMagic::bind(L, "SDL_SetWindowHitTest", SDL_SetWindowHitTest, true);
-	luaMagic::bind(L, "SDL_SetWindowIcon", SDL_SetWindowIcon, true);
-	luaMagic::bind(L, "SDL_SetWindowInputFocus", SDL_SetWindowInputFocus, true);
-	luaMagic::bind(L, "SDL_SetWindowMaximumSize", SDL_SetWindowMaximumSize, true);
-	luaMagic::bind(L, "SDL_SetWindowMinimumSize", SDL_SetWindowMinimumSize, true);
-	luaMagic::bind(L, "SDL_SetWindowModalFor", SDL_SetWindowModalFor, true);
-	luaMagic::bind(L, "SDL_SetWindowOpacity", SDL_SetWindowOpacity, true);
-	luaMagic::bind(L, "SDL_SetWindowPosition", SDL_SetWindowPosition, true);
-	luaMagic::bind(L, "SDL_SetWindowResizable", SDL_SetWindowResizable, true);
-	luaMagic::bind(L, "SDL_SetWindowSize", SDL_SetWindowSize, true);
-	luaMagic::bind(L, "SDL_SetWindowTitle", SDL_SetWindowTitle, true);
-	luaMagic::bind(L, "SDL_ShowMessageBox", SDL_ShowMessageBox, true);
-	luaMagic::bind(L, "SDL_ShowSimpleMessageBox", SDL_ShowSimpleMessageBox, true);
-	luaMagic::bind(L, "SDL_ShowWindow", SDL_ShowWindow, true);
-	luaMagic::bind(L, "SDL_VideoInit", SDL_VideoInit, true);
-	luaMagic::bind(L, "SDL_VideoQuit", SDL_VideoQuit, true);
+	/* Functions */
+	luaMagic::bind(L, "CreateWindow", SDL_CreateWindow, true);
+	luaMagic::bind(L, "DestroyWindow", SDL_DestroyWindow, true);
+	//luaMagic::bind(L, "GetWindowWMInfo", SDL_GetWindowWMInfo, true);
+	luaMagic::bind(L, "HideWindow", SDL_HideWindow, true);
+	luaMagic::bind(L, "IsScreenSaverEnabled", SDL_IsScreenSaverEnabled, true);
+	luaMagic::bind(L, "MaximizeWindow", SDL_MaximizeWindow, true);
+	luaMagic::bind(L, "MinimizeWindow", SDL_MinimizeWindow, true);
+	luaMagic::bind(L, "RaiseWindow", SDL_RaiseWindow, true);
+	luaMagic::bind(L, "RestoreWindow", SDL_RestoreWindow, true);
+	luaMagic::bind(L, "SetWindowBordered", SDL_SetWindowBordered, true);
+	luaMagic::bind(L, "SetWindowBrightness", SDL_SetWindowBrightness, true);
+	luaMagic::bind(L, "SetWindowData", SDL_SetWindowData, true);
+	luaMagic::bind(L, "SetWindowDisplayMode", SDL_SetWindowDisplayMode, true);
+	luaMagic::bind(L, "SetWindowFullscreen", SDL_SetWindowFullscreen, true);
+	luaMagic::bind(L, "SetWindowGammaRamp", SDL_SetWindowGammaRamp, true);
+	luaMagic::bind(L, "SetWindowGrab", SDL_SetWindowGrab, true);
+	//luaMagic::bind(L, "SetWindowHitTest", SDL_SetWindowHitTest, true);
+	luaMagic::bind(L, "SetWindowIcon", SDL_SetWindowIcon, true);
+	luaMagic::bind(L, "SetWindowInputFocus", SDL_SetWindowInputFocus, true);
+	luaMagic::bind(L, "SetWindowMaximumSize", SDL_SetWindowMaximumSize, true);
+	luaMagic::bind(L, "SetWindowMinimumSize", SDL_SetWindowMinimumSize, true);
+	luaMagic::bind(L, "SetWindowModalFor", SDL_SetWindowModalFor, true);
+	luaMagic::bind(L, "SetWindowOpacity", SDL_SetWindowOpacity, true);
+	luaMagic::bind(L, "SetWindowPosition", SDL_SetWindowPosition, true);
+	luaMagic::bind(L, "SetWindowResizable", SDL_SetWindowResizable, true);
+	luaMagic::bind(L, "SetWindowSize", SDL_SetWindowSize, true);
+	luaMagic::bind(L, "SetWindowTitle", SDL_SetWindowTitle, true);
+	//luaMagic::bind(L, "ShowMessageBox", SDL_ShowMessageBox, true);
+	luaMagic::bind(L, "MessageBox", SDL_ShowSimpleMessageBox, true); /* rename */
+	luaMagic::bind(L, "ShowWindow", SDL_ShowWindow, true);
+	luaMagic::bind(L, "VideoInit", SDL_VideoInit, true);
+	luaMagic::bind(L, "VideoQuit", SDL_VideoQuit, true);
+	
+	/* SDL_WindowFlags */
+	luaMagic::setValue(L, "WINDOW_BORDERLESS", (int)SDL_WINDOW_BORDERLESS, true);
+	luaMagic::setValue(L, "WINDOW_SHOWN", (int)SDL_WINDOW_SHOWN, true);
+	luaMagic::setValue(L, "WINDOW_HIDDEN", (int)SDL_WINDOW_HIDDEN, true);
+	luaMagic::setValue(L, "WINDOW_RESIZABLE", (int)SDL_WINDOW_RESIZABLE, true);
+	luaMagic::setValue(L, "WINDOW_MINIMIZED", (int)SDL_WINDOW_MINIMIZED, true);
+	luaMagic::setValue(L, "WINDOW_MAXIMIZED", (int)SDL_WINDOW_MAXIMIZED, true);
+	luaMagic::setValue(L, "WINDOW_FULLSCREEN", (int)SDL_WINDOW_FULLSCREEN, true);
+	luaMagic::setValue(L, "WINDOW_FULLSCREEN_DESKTOP", (int)SDL_WINDOW_FULLSCREEN_DESKTOP, true);
+
+	/* SDL_MessageBoxFlags */
+	luaMagic::setValue(L, "MESSAGEBOX_ERROR", (int)SDL_MESSAGEBOX_ERROR, true);
+	luaMagic::setValue(L, "MESSAGEBOX_WARNING", (int)SDL_MESSAGEBOX_WARNING, true);
+	luaMagic::setValue(L, "MESSAGEBOX_INFORMATION", (int)SDL_MESSAGEBOX_INFORMATION, true);
+
+	/* SDL_BlendMode */
+	luaMagic::setValue(L, "BLENDMODE_NONE", (int)SDL_BLENDMODE_NONE, true);
+	luaMagic::setValue(L, "BLENDMODE_BLEND", (int)SDL_BLENDMODE_BLEND, true);
+	luaMagic::setValue(L, "BLENDMODE_ADD", (int)SDL_BLENDMODE_ADD, true);
+	luaMagic::setValue(L, "BLENDMODE_MOD", (int)SDL_BLENDMODE_MOD, true);
 }
 
