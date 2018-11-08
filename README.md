@@ -1,7 +1,18 @@
 # SDLuna
 A SDL2 bind for Lua  
 
-# Note : Alpha Version
+## Note : Alpha Version
+
+## Install
+```bash
+cmake .
+make
+./install.lua
+```
+* MinGW may need type``cmake -G"MinGW Makefiles" .``.
+* Windows may need type `lua install.lua`.
+* Linux may need use ``chmod`` and ``sudo`` 
+
   
 ## Environment   
 * C++11  
