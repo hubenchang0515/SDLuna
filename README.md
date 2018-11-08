@@ -9,8 +9,8 @@ cmake .
 make
 ./install.lua
 ```
-* MinGW may need type``cmake -G"MinGW Makefiles" .``.
-* Windows may need type `lua install.lua`.
+* MinGW may need type``cmake -G"MinGW Makefiles" .``
+* Windows may need type `lua install.lua`
 * Linux may need use ``chmod`` and ``sudo`` 
 
   
