@@ -25,6 +25,7 @@ extern "C"
 			SDLuna_VedioBind(L);
 			SDLuna_RenderBind(L);
 			SDLuna_EventBind(L);
+			SDLuna_TimerBind(L);
 			
 			/* Set __gc meta-method*/
 			lua_newtable(L);

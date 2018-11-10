@@ -28,15 +28,8 @@
 void SDLuna_VedioBind(lua_State* L);
 void SDLuna_RenderBind(lua_State* L);
 void SDLuna_EventBind(lua_State* L);
+void SDLuna_TimerBind(lua_State* L);
 
-static void SDLuna_openLibs(lua_State* L)
-{
-	SDL_Init(SDL_INIT_EVERYTHING);
-	atexit(SDL_Quit);
-	
-	SDLuna_VedioBind(L);
-	SDLuna_RenderBind(L);
-	SDLuna_EventBind(L);
-}
+
 
 #endif
