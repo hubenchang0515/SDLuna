@@ -12,6 +12,11 @@ inline void luaMagic_write(lua_State* L, SDL_Rect* value)
 template<>
 inline const SDL_Rect* luaMagic_read<const SDL_Rect*>(lua_State* L, int index)
 {
+	if(lua_isnil(L, index))
+	{
+		return nullptr;
+	}
+	
 	static SDL_Rect rect;
 	lua_rawgeti(L, index, 1);
 	rect.x = luaL_checkinteger(L,-1);

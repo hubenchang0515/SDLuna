@@ -67,4 +67,14 @@ void SDLuna_RenderBind(lua_State* L)
 	luaMagic::setValue(L, "RENDERER_ACCELERATED", (int)SDL_RENDERER_ACCELERATED, true);
 	luaMagic::setValue(L, "RENDERER_PRESENTVSYNC", (int)SDL_RENDERER_PRESENTVSYNC, true);
 	luaMagic::setValue(L, "RENDERER_TARGETTEXTURE", (int)SDL_RENDERER_TARGETTEXTURE, true);
+
+	/* Pixel Format */
+	luaMagic::setValue(L, "PIXELFORMAT_UNKNOWN", (uint32_t)SDL_PIXELFORMAT_UNKNOWN, true);
+	luaMagic::setValue(L, "PIXELFORMAT_BGR888", (uint32_t)SDL_PIXELFORMAT_BGR888, true);
+	luaMagic::setValue(L, "PIXELFORMAT_RGBA8888", (uint32_t)SDL_PIXELFORMAT_RGBA8888, true);
+	
+	/* SDL_TextureAccess */
+	luaMagic::setValue(L, "TEXTUREACCESS_STATIC", (int)SDL_TEXTUREACCESS_STATIC, true);
+	luaMagic::setValue(L, "TEXTUREACCESS_STREAMING", (int)SDL_TEXTUREACCESS_STREAMING, true);
+	luaMagic::setValue(L, "TEXTUREACCESS_TARGET", (int)SDL_TEXTUREACCESS_TARGET, true);
 }
