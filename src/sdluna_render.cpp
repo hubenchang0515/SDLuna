@@ -11,7 +11,7 @@ void SDLuna_RenderBind(lua_State* L)
 	luaMagic::bind(L, "CreateTextureFromSurface", SDL_CreateTextureFromSurface, true);
 	luaMagic::bind(L, "CreateWindowAndRenderer", SDL_CreateWindowAndRenderer, true);
 	luaMagic::bind(L, "DestroyRenderer", SDL_DestroyRenderer, true);
-	luaMagic::bind(L, "DestroyTexture", SDL_DestroyTexture, true);
+	//luaMagic::bind(L, "DestroyTexture", SDL_DestroyTexture, true);
 	luaMagic::bind(L, "GL_BindTexture", SDL_GL_BindTexture, true);
 	luaMagic::bind(L, "GL_UnbindTexture", SDL_GL_UnbindTexture, true);
 	// luaMagic::bind(L, "GetNumRenderDrivers", SDL_GetNumRenderDrivers, true);

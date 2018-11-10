@@ -5,7 +5,7 @@ void SDLuna_VedioBind(lua_State* L)
 {
 	/* Functions */
 	luaMagic::bind(L, "CreateWindow", SDL_CreateWindow, true);
-	luaMagic::bind(L, "DestroyWindow", SDL_DestroyWindow, true);
+	//luaMagic::bind(L, "DestroyWindow", SDL_DestroyWindow, true);
 	//luaMagic::bind(L, "GetWindowWMInfo", SDL_GetWindowWMInfo, true);
 	luaMagic::bind(L, "HideWindow", SDL_HideWindow, true);
 	luaMagic::bind(L, "IsScreenSaverEnabled", SDL_IsScreenSaverEnabled, true);

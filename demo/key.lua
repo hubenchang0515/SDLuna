@@ -18,6 +18,3 @@ while true do
 	-- Display
 	sdl.RenderPresent(ren)
 end
-
-sdl.DestroyRenderer(ren)
-sdl.DestroyWindow(win)

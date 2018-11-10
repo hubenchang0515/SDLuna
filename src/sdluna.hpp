@@ -16,7 +16,9 @@
 #include "types/SDL_Event.hpp"
 #include "types/SDL_Point.hpp"
 #include "types/SDL_Rect.hpp"
-
+#include "types/SDL_Renderer.hpp"
+#include "types/SDL_Texture.hpp"
+#include "types/SDL_Window.hpp"
 
 
 
