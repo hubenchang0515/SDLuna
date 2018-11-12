@@ -10,25 +10,34 @@ math.randomseed(os.time())
 local counter1 = sdl.CreateCounter()
 local counter2 = sdl.CreateCounter()
 local counter3 = sdl.CreateCounter()
-local rect1
-local rect2
-local rect3
+local rect1 = {-100, 16, 100, 100}
+local rect2 = {-100, 132, 100, 100}
+local rect3 = {-100, 248, 100, 100}
 while true do
 	local event = sdl.PollEvent()
 	if event ~= nil and event.type == sdl.EVENT_QUIT then
 		break
 	end
 	
-	if counter1:time(500) then
-		rect1 = {50, 50, math.random(100), math.random(300)}
+	if counter1:time(10) then
+		rect1[1] = rect1[1] + 1
+		if rect1[1] >= 600 then
+			rect1[1] = -100
+		end
 	end
 	
-	if counter2:time(2000) then
-		rect2 = {250, 50, math.random(100), math.random(300)}
+	if counter2:time(50) then
+		rect2[1] = rect2[1] + 1
+		if rect2[1] >= 600 then
+			rect2[1] = -100
+		end
 	end
 	
-	if counter3:time(4000) then
-		rect3 = {450, 50, math.random(100), math.random(300)}
+	if counter3:time(100) then
+		rect3[1] = rect3[1] + 1
+		if rect2[1] >= 600 then
+			rect2[1] = -100
+		end
 	end
 
 	sdl.SetRenderDrawColor(renderer, 0,0,0,0)
