@@ -27,6 +27,7 @@ extern "C"
 			SDLuna_EventBind(L);
 			SDLuna_TimerBind(L);
 			SDLuna_KeyboardBind(L);
+			SDLuna_DrawBind(L);
 			
 			/* Set __gc meta-method*/
 			lua_newtable(L);
