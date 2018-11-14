@@ -17,7 +17,7 @@ make
 cd $LUA_SRC
 gcc -c -std=c99 -O2 -fPIC *.c
 rm lua.o luac.o
-ar liblua.a *.o
+ar rc liblua.a *.o
 cp liblua.a /usr/local/lib/liblua.a
 ```
 
