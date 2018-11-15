@@ -11,6 +11,9 @@ SET(CMAKE_BUILDTYPE release)
 # C++11 standard
 SET(CMAKE_CXX_STANDARD 11)
 
+# -fPIC
+ADD_COMPILE_OPTIONS(-fPIC)
+
 # Link libSDL2 and liblua
 LINK_LIBRARIES(SDL2 SDL2_Image lua HB)
 
