@@ -25,6 +25,7 @@ extern "C"
 			SDLuna_VedioBind(L);
 			SDLuna_RenderBind(L);
 			SDLuna_EventBind(L);
+			SDLuna_ImageBind(L);
 			SDLuna_TimerBind(L);
 			SDLuna_KeyboardBind(L);
 			SDLuna_DrawBind(L);

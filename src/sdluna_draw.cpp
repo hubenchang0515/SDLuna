@@ -11,7 +11,7 @@ static int FillEllipse(SDL_Renderer* renderer, int x, int y, int rx, int ry);
 
 void SDLuna_DrawBind(lua_State* L)
 {
-	static int init = HideOnBrushInit();
+	HideOnBrushInit();
 	
 	luaMagic::bind(L, "Circle", Circle, true);
 	luaMagic::bind(L, "FillCircle", FillCircle, true);

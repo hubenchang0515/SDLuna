@@ -12,13 +12,14 @@ SET(CMAKE_BUILDTYPE release)
 SET(CMAKE_CXX_STANDARD 11)
 
 # Link libSDL2 and liblua
-LINK_LIBRARIES(SDL2 lua HB)
+LINK_LIBRARIES(SDL2 SDL2_Image lua HB)
 
 # Check dependence
 include(CheckIncludeFileCXX)
 SET(CMAKE_REQUIRED_FLAGS "-std=c++11 -shared")
 CHECK_INCLUDE_FILE_CXX("luaMagic/luaMagic.hpp" luaMagic_exist)
 CHECK_INCLUDE_FILE_CXX("SDL2/SDL.h" SDL2_exist)
+CHECK_INCLUDE_FILE_CXX("SDL2/SDL_image.h" SDL2_image_exist)
 CHECK_INCLUDE_FILE_CXX("lua.hpp" lua_exist)
 CHECK_INCLUDE_FILE_CXX("HB/brush.h" HB_exist)
 

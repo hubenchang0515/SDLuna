@@ -28,6 +28,7 @@
 void SDLuna_VedioBind(lua_State* L);
 void SDLuna_RenderBind(lua_State* L);
 void SDLuna_EventBind(lua_State* L);
+void SDLuna_ImageBind(lua_State* L);
 void SDLuna_TimerBind(lua_State* L);
 void SDLuna_KeyboardBind(lua_State* L);
 void SDLuna_DrawBind(lua_State* L);
