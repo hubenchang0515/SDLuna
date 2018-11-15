@@ -30,7 +30,7 @@ inline void luaMagic_write(lua_State* L, SDL_Window* value)
 template<>
 inline SDL_Window* luaMagic_read<SDL_Window*>(lua_State* L, int index)
 {
-	if(lua_isnil(L, index))
+	if(lua_isnoneornil(L, index))
 	{
 		return nullptr;
 	}
