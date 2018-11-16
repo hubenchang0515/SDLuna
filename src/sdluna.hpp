@@ -3,6 +3,9 @@
 
 #include <luaMagic/luaMagic.hpp>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 
 /* Cancel SDL_main */
 //#ifdef main
@@ -12,6 +15,7 @@
 /********************************************************************
 **********************Template specializations***********************
 ********************************************************************/
+#include "types/Mix_Music.hpp"
 #include "types/SDL_bool.hpp"
 #include "types/SDL_Event.hpp"
 #include "types/SDL_Point.hpp"
@@ -32,6 +36,7 @@ void SDLuna_ImageBind(lua_State* L);
 void SDLuna_TimerBind(lua_State* L);
 void SDLuna_KeyboardBind(lua_State* L);
 void SDLuna_DrawBind(lua_State* L);
+void SDLuna_MusicBind(lua_State* L);
 
 
 #endif
