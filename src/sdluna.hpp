@@ -37,6 +37,7 @@ void SDLuna_TimerBind(lua_State* L);
 void SDLuna_KeyboardBind(lua_State* L);
 void SDLuna_DrawBind(lua_State* L);
 void SDLuna_MusicBind(lua_State* L);
+void SDLuna_ErrorBind(lua_State* L);
 
 
 #endif
