@@ -22,6 +22,6 @@ while true do
 	sdl.SetRenderDrawColor(renderer, 255,0,0,0)
 	sdl.RenderFillRect(renderer, {100, 50, math.random(500), math.random(500)})
 	sdl.SetRenderTarget(renderer, nil)
-	sdl.RenderCopy(renderer, texture, nil, nil)
+	sdl.RenderCopy(renderer, texture)
 	sdl.RenderPresent(renderer)
 end
