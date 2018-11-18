@@ -15,10 +15,41 @@ extern "C"
 			/* SDLuna had been initialized before */
 			lua_getfield(L, LUA_REGISTRYINDEX, SDLUNA_GLOBAL_IDENTIFICATION);
 		}
-		else if(0 == SDL_Init(SDL_INIT_EVERYTHING) && 
-				0 == IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG|IMG_INIT_TIF) &&
-				0 == Mix_Init(MIX_INIT_FLAC|MIX_INIT_MOD|MIX_INIT_MP3|MIX_INIT_OGG) &&
-				0 == TTF_Init())
+		else if(0 != SDL_Init(SDL_INIT_EVERYTHING))
+		{
+			#ifdef SDLUNA_DEBUG
+				SDL_Log("SDL_Init failed.");
+			#endif
+			lua_pushstring(L, SDL_GetError());
+		}
+		else if(0 == IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG|IMG_INIT_TIF))
+		{
+			#ifdef SDLUNA_DEBUG
+				SDL_Log("IMG_Init failed.");
+			#endif
+			SDL_Quit();
+			lua_pushstring(L, IMG_GetError());
+		}
+		else if(0 == Mix_Init(MIX_INIT_FLAC|MIX_INIT_MOD|MIX_INIT_MP3|MIX_INIT_OGG))
+		{
+			#ifdef SDLUNA_DEBUG
+				SDL_Log("Mix_Init failed.");
+			#endif
+			SDL_Quit();
+			IMG_Quit();
+			lua_pushstring(L, Mix_GetError());
+		}
+		else if(0 != TTF_Init())
+		{
+			#ifdef SDLUNA_DEBUG
+				SDL_Log("TTF_Init failed.");
+			#endif
+			SDL_Quit();
+			IMG_Quit();
+			Mix_Quit();
+			lua_pushstring(L, TTF_GetError());
+		}	
+		else
 		{
 			/* Initialize SDLuna first time */
 			firsttime = false;
@@ -32,8 +63,9 @@ extern "C"
 			SDLuna_TimerBind(L);
 			SDLuna_KeyboardBind(L);
 			SDLuna_DrawBind(L);
+			SDLuna_MusicBind(L);
 			
-			/* Set __gc meta-method*/
+			// /* Set __gc meta-method*/
 			lua_newtable(L);
 			lua_pushcfunction(L, [](lua_State* L)->int{SDL_Quit();IMG_Quit();Mix_Quit();TTF_Quit(); return 0;});
 			lua_setfield(L, -2, "__gc");
@@ -44,15 +76,6 @@ extern "C"
 			/* save */
 			lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_GLOBAL_IDENTIFICATION);
 			lua_getfield(L, LUA_REGISTRYINDEX, SDLUNA_GLOBAL_IDENTIFICATION);
-		}
-		else
-		{
-			/* failed */
-			SDL_Quit();
-			IMG_Quit();
-			Mix_Quit();
-			TTF_Quit();
-			lua_pushnil(L);
 		}
 		
 		return 1;
