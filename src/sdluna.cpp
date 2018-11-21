@@ -34,6 +34,7 @@ extern "C"
 			SDLuna_DrawBind(L);
 			SDLuna_MusicBind(L);
 			SDLuna_ErrorBind(L);
+			SDLuna_TtfBind(L);
 			
 			// /* Set __gc meta-method*/
 			lua_newtable(L);
@@ -97,7 +98,7 @@ bool SDLuna_Init(lua_State* L)
 		#ifdef SDLUNA_DEBUG
 			SDL_Log("Mix_OpenAudio failed.");
 		#endif
-		lua_pushstring(L, TTF_GetError());
+		lua_pushstring(L, Mix_GetError());
 		return false;
 	}
 	

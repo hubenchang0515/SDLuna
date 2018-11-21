@@ -23,6 +23,7 @@
 #include "types/SDL_Renderer.hpp"
 #include "types/SDL_Texture.hpp"
 #include "types/SDL_Window.hpp"
+#include "types/TTF_Font.hpp"
 
 
 
@@ -38,6 +39,7 @@ void SDLuna_KeyboardBind(lua_State* L);
 void SDLuna_DrawBind(lua_State* L);
 void SDLuna_MusicBind(lua_State* L);
 void SDLuna_ErrorBind(lua_State* L);
+void SDLuna_TtfBind(lua_State* L);
 
 
 #endif
