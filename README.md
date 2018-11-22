@@ -1,7 +1,7 @@
 # SDLuna
 A SDL2 bind for Lua  
 
-## Note : Alpha Version
+## Alpha Version 1.0
 
 ## Install
 ```bash
