@@ -47,14 +47,16 @@ inline int CreateFontGC(lua_State* L)
 	lua_newtable(L);
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		TTF_Font* ptr = *static_cast<TTF_Font**>(lua_touserdata(L, 1));
-		#ifdef SDLUNA_DEBUG
-			SDL_Log("GC : TTF_CloseFont(%p)", ptr);
-		#endif
+		// #ifdef SDLUNA_DEBUG
+		// 	SDL_Log("GC : TTF_CloseFont(%p)", ptr);
+		// #endif
 		TTF_CloseFont(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
 	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_FONT_GC);
+
+	return 0;
 }
 
 #endif

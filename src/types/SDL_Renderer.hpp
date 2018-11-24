@@ -47,14 +47,16 @@ inline int CreateRendererGC(lua_State* L)
 	lua_newtable(L);
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		SDL_Renderer* ptr = *static_cast<SDL_Renderer**>(lua_touserdata(L, 1));
-		#ifdef SDLUNA_DEBUG
-			SDL_Log("GC : SDL_DestroyRenderer(%p)", ptr);
-		#endif
+		// #ifdef SDLUNA_DEBUG
+		// 	SDL_Log("GC : SDL_DestroyRenderer(%p)", ptr);
+		// #endif
 		SDL_DestroyRenderer(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
 	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_RENDERER_GC);
+
+	return 0;
 }
 
 #endif

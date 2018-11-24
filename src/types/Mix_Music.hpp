@@ -47,14 +47,16 @@ inline int CreateMusicGC(lua_State* L)
 	lua_newtable(L);
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		Mix_Music* ptr = *static_cast<Mix_Music**>(lua_touserdata(L, 1));
-		#ifdef SDLUNA_DEBUG
-			SDL_Log("GC : Mix_FreeMusic(%p)", ptr);
-		#endif
+		// #ifdef SDLUNA_DEBUG
+		// 	SDL_Log("GC : Mix_FreeMusic(%p)", ptr);
+		// #endif
 		Mix_FreeMusic(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
 	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_MUSIC_GC);
+
+	return 0;
 }
 
 #endif

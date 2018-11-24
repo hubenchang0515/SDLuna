@@ -47,14 +47,16 @@ inline int CreateWindowGC(lua_State* L)
 	lua_newtable(L);
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		SDL_Window* ptr = *static_cast<SDL_Window**>(lua_touserdata(L, 1));
-		#ifdef SDLUNA_DEBUG
-			SDL_Log("GC : SDL_DestroyWindow(%p)", ptr);
-		#endif
+		// #ifdef SDLUNA_DEBUG
+		// 	SDL_Log("GC : SDL_DestroyWindow(%p)", ptr);
+		// #endif
 		SDL_DestroyWindow(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
 	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_WINDOW_GC);
+
+	return 0;
 }
 
 #endif

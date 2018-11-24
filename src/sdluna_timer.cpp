@@ -56,8 +56,8 @@ int CreateCounter(lua_State* L)
 int CheckCounter(lua_State* L)
 {
 	lua_getfield(L, 1, LAST_TICK);
-	uint32_t delayms  = luaL_checkinteger(L, 2);
-	uint32_t lastTick = luaL_checkinteger(L, -1);
+	lua_Integer delayms  = luaL_checkinteger(L, 2);
+	lua_Integer lastTick = luaL_checkinteger(L, -1);
 	
 	if(lastTick != 0 && SDL_GetTicks() - lastTick < delayms)
 	{

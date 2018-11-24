@@ -14,9 +14,9 @@ inline SDL_Point* luaMagic_read<SDL_Point*>(lua_State* L, int index)
 {
 	static SDL_Point p;
 	lua_rawgeti(L, index, 1);
-	p.x = luaL_checkinteger(L,-1);
+	p.x = static_cast<int>(luaL_checkinteger(L,-1));
 	lua_rawgeti(L, index, 2);
-	p.y = luaL_checkinteger(L,-1);
+	p.y = static_cast<int>(luaL_checkinteger(L,-1));
 	return &p;
 }
 

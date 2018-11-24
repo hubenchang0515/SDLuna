@@ -19,13 +19,13 @@ inline const SDL_Rect* luaMagic_read<const SDL_Rect*>(lua_State* L, int index)
 	
 	static SDL_Rect rect;
 	lua_rawgeti(L, index, 1);
-	rect.x = luaL_checkinteger(L,-1);
+	rect.x = static_cast<int>(luaL_checkinteger(L,-1));
 	lua_rawgeti(L, index, 2);
-	rect.y = luaL_checkinteger(L,-1);
+	rect.y = static_cast<int>(luaL_checkinteger(L,-1));
 	lua_rawgeti(L, index, 3);
-	rect.w = luaL_checkinteger(L,-1);
+	rect.w = static_cast<int>(luaL_checkinteger(L,-1));
 	lua_rawgeti(L, index, 4);
-	rect.h = luaL_checkinteger(L,-1);
+	rect.h = static_cast<int>(luaL_checkinteger(L,-1));
 	return &rect;
 }
 

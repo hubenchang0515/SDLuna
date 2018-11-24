@@ -47,14 +47,16 @@ inline int CreateTextureGC(lua_State* L)
 	lua_newtable(L);
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		SDL_Texture* ptr = *static_cast<SDL_Texture**>(lua_touserdata(L, 1));
-		#ifdef SDLUNA_DEBUG
-			SDL_Log("GC : SDL_DestroyTexture(%p)", ptr);
-		#endif
+		// #ifdef SDLUNA_DEBUG
+		// 	SDL_Log("GC : SDL_DestroyTexture(%p)", ptr);
+		// #endif
 		SDL_DestroyTexture(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
 	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_TEXTURE_GC);
+
+	return 0;
 }
 
 #endif
