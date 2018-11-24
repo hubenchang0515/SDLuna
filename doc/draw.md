@@ -25,7 +25,7 @@ Parameters
 * ``y`` -- y position of point
 
 ## Line
-``Line(renderer, x1, y1, x2, y2)``
+``Line(renderer, x1, y1, x2, y2)``  
 Description : Draw a line in render target
 
 Return   
@@ -40,7 +40,7 @@ Parameters
 * ``y2`` -- end y position of point
 
 ## Rect
-``Rect(renderer, rect)``
+``Rect(renderer, rect)``  
 Description : Draw a rectangle in render target
 
 Return   
@@ -52,7 +52,7 @@ Parameters
 * ``rect`` -- rectangle by Lua array ``{x, y, width. height}`` 
 
 ## FillRect
-``FillRect(renderer, rect)``
+``FillRect(renderer, rect)``  
 Description : Draw a filled rectangle in render target
 
 Return   
@@ -65,7 +65,7 @@ Parameters
 
 
 ## Circle
-``Circle(renderer, x, y, r)``
+``Circle(renderer, x, y, r)``  
 Description : Draw a circle in render target
 
 Return   
@@ -79,7 +79,7 @@ Parameters
 * ``r`` -- radius
 
 ## FillCircle
-``FillCircle(renderer, x, y, r)``
+``FillCircle(renderer, x, y, r)``  
 Description : Draw a filled circle in render target
 
 Return   
@@ -93,7 +93,7 @@ Parameters
 * ``r`` -- radius
 
 ## Triangle
-``Triangle(renderer, x1, y1, x2, y2, x3, y3)``
+``Triangle(renderer, x1, y1, x2, y2, x3, y3)``  
 Description : Draw a triangle in render target
 
 Return   
@@ -110,7 +110,7 @@ Parameters
 * ``y3`` -- y position of point3  
 
 ## FillTriangle
-``FillTriangle(renderer, x1, y1, x2, y2, x3, y3)``
+``FillTriangle(renderer, x1, y1, x2, y2, x3, y3)``  
 Description : Draw a filled triangle in render target
 
 Return   
@@ -127,7 +127,7 @@ Parameters
 * ``y3`` -- y position of point3  
 
 ## Ellipse
-``Ellipse(renderer, x, y, rx, ry)``
+``Ellipse(renderer, x, y, rx, ry)``  
 Description : Draw a ellipse in render target
 
 Return   
@@ -142,7 +142,7 @@ Parameters
 * ``ry`` -- radius y axis
 
 ## FillEllipse
-``FillEllipse(renderer, x, y, rx, ry)``
+``FillEllipse(renderer, x, y, rx, ry)``  
 Description : Draw a filled ellipse in render target
 
 Return   
