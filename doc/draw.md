@@ -6,8 +6,8 @@
 * [FillRect](#FillRect)``(renderer, rect)``
 * [Circle](#Circle)``(renderer, x, y, r)``
 * [FillCircle](#FillCircle)``(renderer, x, y, r)``  
-* [Triangle](#Triangle])``(renderer, x1, y1, x2, y2, x3, y3)``
-* [FillTriangle](#FillTriangle])``(renderer, x1, y1, x2, y2, x3, y3)``
+* [Triangle](#Triangle)``(renderer, x1, y1, x2, y2, x3, y3)``
+* [FillTriangle](#FillTriangle)``(renderer, x1, y1, x2, y2, x3, y3)``
 * [Ellipse](#Ellipse)``(renderer, x, y, rx, ry)``
 * [FillEllipse](#FillEllipse)``(renderer, x, y, rx, ry)``
 
