@@ -81,7 +81,7 @@ Parameters
 * ``renderer`` -- renderer  
 
 ## RenderPresent  
-``RenderPresent(renderer)``
+``RenderPresent(renderer)``  
 Description : Update the window 
 
 Return   
