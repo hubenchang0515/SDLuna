@@ -70,7 +70,7 @@ Parameters
 * ``alpha`` -- alpha channel from ``0`` to ``255``  
 
 ## RenderClear  
-``RenderClear(renderer)``
+``RenderClear(renderer)``  
 Description : Clear the render target
 
 Return   
