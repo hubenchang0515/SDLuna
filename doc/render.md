@@ -54,7 +54,7 @@ Parameters
 * ``renderer`` -- renderer
 * ``texture`` -- texture or ``nil`` for the default render target(window)  
 
-## SetRenderDrawColor
+## SetRenderDrawColor  
 ``SetRenderDrawColor(renderer, red, green, blue, alpha)``  
 Description : Set color
 
@@ -69,7 +69,7 @@ Parameters
 * ``blue`` -- blue channel from ``0`` to ``255``  
 * ``alpha`` -- alpha channel from ``0`` to ``255``  
 
-## RenderClear
+## RenderClear  
 ``RenderClear(renderer)``
 Description : Clear the render target
 
@@ -80,7 +80,7 @@ Return
 Parameters
 * ``renderer`` -- renderer  
 
-## RenderPresent
+## RenderPresent  
 ``RenderPresent(renderer)``
 Description : Update the window 
 
