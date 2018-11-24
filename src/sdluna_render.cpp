@@ -30,13 +30,9 @@ void SDLuna_RenderBind(lua_State* L)
 	luaMagic::bind(L, "RenderClear", SDL_RenderClear, true);
 	luaMagic::bind(L, "RenderCopy", SDL_RenderCopy, true);
 	//luaMagic::bind(L, "RenderCopyEx", SDL_RenderCopyEx, true);
-	luaMagic::bind(L, "RenderDrawLine", SDL_RenderDrawLine, true);
 	// luaMagic::bind(L, "RenderDrawLines", SDL_RenderDrawLines, true);
-	luaMagic::bind(L, "RenderDrawPoint", SDL_RenderDrawPoint, true);
 	// luaMagic::bind(L, "RenderDrawPoints", SDL_RenderDrawPoints, true);
-	luaMagic::bind(L, "RenderDrawRect", SDL_RenderDrawRect, true);
 	// luaMagic::bind(L, "RenderDrawRects", SDL_RenderDrawRects, true);
-	luaMagic::bind(L, "RenderFillRect", SDL_RenderFillRect, true);
 	luaMagic::bind(L, "RenderFillRects", SDL_RenderFillRects, true);
 	luaMagic::bind(L, "RenderGetClipRect", SDL_RenderGetClipRect, true);
 	luaMagic::bind(L, "RenderGetIntegerScale", SDL_RenderGetIntegerScale, true);
@@ -70,7 +66,7 @@ void SDLuna_RenderBind(lua_State* L)
 
 	/* Pixel Format */
 	luaMagic::setValue(L, "PIXELFORMAT_UNKNOWN", (uint32_t)SDL_PIXELFORMAT_UNKNOWN, true);
-	luaMagic::setValue(L, "PIXELFORMAT_BGR888", (uint32_t)SDL_PIXELFORMAT_BGR888, true);
+	luaMagic::setValue(L, "PIXELFORMAT_RGB888", (uint32_t)SDL_PIXELFORMAT_RGB888, true);
 	luaMagic::setValue(L, "PIXELFORMAT_RGBA8888", (uint32_t)SDL_PIXELFORMAT_RGBA8888, true);
 	
 	/* SDL_TextureAccess */

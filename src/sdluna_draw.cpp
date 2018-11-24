@@ -13,6 +13,10 @@ void SDLuna_DrawBind(lua_State* L)
 {
 	HideOnBrushInit();
 	
+	luaMagic::bind(L, "Point", SDL_RenderDrawPoint, true);
+	luaMagic::bind(L, "Line", SDL_RenderDrawLine, true);
+	luaMagic::bind(L, "Rect", SDL_RenderDrawRect, true);
+	luaMagic::bind(L, "FillRect", SDL_RenderFillRect, true);
 	luaMagic::bind(L, "Circle", Circle, true);
 	luaMagic::bind(L, "FillCircle", FillCircle, true);
 	luaMagic::bind(L, "Triangle", Triangle, true);
