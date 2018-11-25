@@ -3,7 +3,7 @@
 
 ## PollEvent
 ``PollEvent()``  
-Description : Load a music file  
+Description : Try to get a Event
 
 Return   
 * ``Event`` while event got
