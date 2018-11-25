@@ -1,7 +1,8 @@
 #ifndef SDLUNA_SDL_EVENT_H
 #define SDLUNA_SDL_EVENT_H
 
-static void pushkey(lua_State* L, SDL_Keycode key);
+static void SDLuna_PushKey(lua_State* L, SDL_Keycode key);
+static void SDLuna_PushMouseButto(lua_State* L, Uint8 mouse);
 
 /* Write SDL_Event* to Lua */
 template<> 
@@ -18,22 +19,31 @@ inline void luaMagic_write(lua_State* L, SDL_Event* value)
 	lua_newtable(L);
 	
 	/* Store values */
-	lua_pushstring(L, "type");
-	lua_pushinteger(L, value->type);
-	lua_settable(L,-3);
+	luaMagic_write(L, value->type);
+	lua_setfield(L, -2, "type");
 	
 	switch(value->type)
 	{
 	case SDL_QUIT:
-		lua_pushstring(L, "timestamp");
-		lua_pushinteger(L, value->quit.timestamp);
-		lua_settable(L,-3);
+		luaMagic_write(L, value->quit.timestamp);
+		lua_setfield(L, -2, "timestamp");
 		break;
 	case SDL_KEYDOWN:
 	case SDL_KEYUP:
 		
-		pushkey(L, value->key.keysym.sym);
+		SDLuna_PushKey(L, value->key.keysym.sym);
 		
+		break;
+
+	case SDL_MOUSEBUTTONDOWN:
+	case SDL_MOUSEBUTTONUP:
+		SDLuna_PushMouseButto(L, value->button.button);
+		luaMagic_write(L, value->button.x);
+		lua_setfield(L, -2, "x");
+		luaMagic_write(L, value->button.y);
+		lua_setfield(L, -2, "y");
+		luaMagic_write(L, value->button.clicks);
+		lua_setfield(L, -2, "clicks");
 		break;
 	}
 	
@@ -48,9 +58,30 @@ inline SDL_Event* luaMagic_read<SDL_Event*>(lua_State* L, int index)
 	return static_cast<SDL_Event*>(value);
 }
 
+/* Push mouse value */
+static void SDLuna_PushMouseButto(lua_State* L, Uint8 mouse)
+{
+	switch(mouse)
+	{
+	case SDL_BUTTON_LEFT:
+		lua_pushstring(L, "left");
+		break;
+	case SDL_BUTTON_RIGHT:
+		lua_pushstring(L, "right");
+		break;
+	case SDL_BUTTON_MIDDLE:
+		lua_pushstring(L, "middle");
+		break;
+	default:
+		lua_pushstring(L, "unknown");
+		break;
+	}
+
+	lua_setfield(L, -2, "button");
+}
 
 /* Push key value */
-static void pushkey(lua_State* L, SDL_Keycode key)
+static void SDLuna_PushKey(lua_State* L, SDL_Keycode key)
 {
 	lua_pushstring(L, "key");
 	

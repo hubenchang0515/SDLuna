@@ -1,5 +1,6 @@
 # SDLuna
-A SDL2 bind for Lua  
+A SDL2 bind for Lua    
+![SDLuna](logo.png)
 
 ## Alpha Version 1.0
 

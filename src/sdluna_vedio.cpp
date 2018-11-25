@@ -63,3 +63,17 @@ void SDLuna_VedioBind(lua_State* L)
 	luaMagic::setValue(L, "BLENDMODE_MOD", (int)SDL_BLENDMODE_MOD, true);
 }
 
+
+int SDLuna_GetWindowSize(lua_State* L)
+{
+	SDL_Window* win = luaMagic_read<SDL_Window*>(L,1);
+	int w,h;
+	SDL_GetWindowSize(win, &w, &h);
+	lua_newtable(L);
+	luaMagic_write(L, w);
+	lua_setfield(L, -2, "width");
+	luaMagic_write(L, h);
+	lua_setfield(L, -2, "height");
+
+	return 1;
+}
