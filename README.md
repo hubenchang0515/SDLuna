@@ -1,6 +1,5 @@
-# SDLuna
-A SDL2 bind for Lua    
-![SDLuna](logo.png)
+# ![SDLuna](logo.png)
+A Lua graphics library based on Lua  
 
 ## Alpha Version 1.0
 
