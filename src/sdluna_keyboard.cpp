@@ -16,12 +16,12 @@ static std::map<std::string, SDL_Scancode> keyMap = {
 	{"backspace", SDL_SCANCODE_BACKSPACE},
 	{"tab", SDL_SCANCODE_TAB},
 	{"enter", SDL_SCANCODE_RETURN},
-	{"left alt", SDL_SCANCODE_LALT},
-	{"right alt", SDL_SCANCODE_RALT},
-	{"left ctrl", SDL_SCANCODE_LCTRL},
-	{"right ctrl", SDL_SCANCODE_RCTRL},
-	{"left shift", SDL_SCANCODE_LSHIFT},
-	{"right shift", SDL_SCANCODE_RSHIFT},
+	{"left-alt", SDL_SCANCODE_LALT},
+	{"right-alt", SDL_SCANCODE_RALT},
+	{"left-ctrl", SDL_SCANCODE_LCTRL},
+	{"right-ctrl", SDL_SCANCODE_RCTRL},
+	{"left-shift", SDL_SCANCODE_LSHIFT},
+	{"right-shift", SDL_SCANCODE_RSHIFT},
 	
 	/* Number Key */
 	{"0", SDL_SCANCODE_0},

@@ -52,5 +52,5 @@ end
  - [x] [Render](render.md)
  - [x] [Draw](draw.md)
  - [x] [Sound](sound.md)
- - [ ] [Event](event.md)
- - [ ] [Keyboard](keyboard.md)
+ - [x] [Event](event.md)
+ - [x] [Keyboard](keyboard.md)
