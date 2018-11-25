@@ -6,6 +6,7 @@
 * [RenderClear](#RenderClear)``(renderer)``
 * [RenderPresent](#RenderPresent)``(renderer)``
 * [RenderCopy](#RenderCopy)``(renderer, texture, srcrect, dstrect)``  
+* [LoadImage](#LoadImage)``(renderer, img)``  
 
 ## CreateRenderer
 ``CreateRenderer(window, index, flag)``  
@@ -104,4 +105,17 @@ Parameters
 * ``texture`` -- the source texture  
 * ``srcrect``  -- source texture area by Lua array ``{x, y, width. height}``  
 * ``srcrect``  -- target area by Lua array ``{x, y, width. height}``  
+
+
+## LoadImage
+``LoadImage(renderer, file)``  
+Description : Load a image to texture    
+
+Return   
+* ``Texture`` while successful
+* ``nil`` while failed
+
+Parameters
+* ``renderer`` -- renderer
+* ``file`` -- image file path  
 
