@@ -1,5 +1,5 @@
 # ![SDLuna](logo.png)
-A Lua graphics library based on Lua  
+A Lua graphics library based on SDL  
 
 ## Alpha Version 1.0
 
