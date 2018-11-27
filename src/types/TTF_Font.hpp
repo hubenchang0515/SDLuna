@@ -32,6 +32,7 @@ inline TTF_Font* luaMagic_read<TTF_Font*>(lua_State* L, int index)
 {
 	if(lua_isnoneornil(L, index))
 	{
+		luaL_error(L, "bad argument #%d (TTF_Font* expected, got nil)", index);
 		return nullptr;
 	}
 	else

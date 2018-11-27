@@ -32,6 +32,7 @@ inline SDL_Texture* luaMagic_read<SDL_Texture*>(lua_State* L, int index)
 {
 	if(lua_isnoneornil(L, index))
 	{
+		luaL_error(L, "bad argument #%d (SDL_Texture* expected, got nil)", index);
 		return nullptr;
 	}
 	else

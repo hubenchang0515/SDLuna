@@ -32,6 +32,7 @@ inline SDL_Renderer* luaMagic_read<SDL_Renderer*>(lua_State* L, int index)
 {
 	if(lua_isnoneornil(L, index))
 	{
+		luaL_error(L, "bad argument #%d (SDL_Renderer* expected, got nil)", index);
 		return nullptr;
 	}
 	else
