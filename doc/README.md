@@ -54,3 +54,4 @@ end
  - [x] [Sound](sound.md)
  - [x] [Event](event.md)
  - [x] [Keyboard](keyboard.md)
+ - [x] [Timer](timer.md)
