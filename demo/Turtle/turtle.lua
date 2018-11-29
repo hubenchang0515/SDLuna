@@ -1,6 +1,6 @@
 local sdl = require("libsdluna")
 local turtle = {}
-turtle.__pi = 3.1415926
+
 
 function turtle.toint(n)
 	if n > 0 then
@@ -54,9 +54,9 @@ function turtle.go(pix)
 	local dstX
 	local dstY
 	for n=1,pix,1 do
-		dstX = turtle.toint(turtle.__x + n * math.cos(turtle.__angle / 180 * turtle.__pi))
-		dstY = turtle.toint(turtle.__y + n * math.sin(turtle.__angle / 180 * turtle.__pi))
-		sdl.SetRenderDrawColor(turtle.__ren, 0xe9,0x1e,63,0)
+		dstX = turtle.toint(turtle.__x + n * math.cos(math.rad(turtle.__angle)))
+		dstY = turtle.toint(turtle.__y + n * math.sin(math.rad(turtle.__angle)))
+		sdl.SetRenderDrawColor(turtle.__ren, 0xe9,0x1e,0x63,0)
 		sdl.Line(turtle.__ren, turtle.__x, turtle.__y, dstX, dstY)
 		sdl.SetRenderDrawColor(turtle.__ren, 0,0xff,0,0)
 		sdl.Point(turtle.__ren, dstX, dstY)
@@ -69,7 +69,7 @@ function turtle.go(pix)
 			end
 		end
 		
-		sdl.SetRenderDrawColor(turtle.__ren, 0xe9,0x1e,63,0)
+		sdl.SetRenderDrawColor(turtle.__ren, 0xe9,0x1e,0x63,0)
 		sdl.Point(turtle.__ren, dstX, dstY)
 	end
 	

@@ -1,36 +1,37 @@
 local sdl = require("libsdluna")
 
-
-
 local Game = {}
 
 -- Create Game , can only invoke once
-function Game:Create(title, width, height)
+function Game:init(title, width, height)
 	title = title or "SDLuna"
-	width = width or 800
-	height = height or 450
-	if self.win == nil and self.ren == nil then
-		self.win = sdl.CreateWindow(title, 
+	self.width = self.width or  width or 800
+	self.height = self.height or height or 450
+	self.win = self.win or sdl.CreateWindow(title, 
 									sdl.WINDOWPOS_UNDEFINED, 
 									sdl.WINDOWPOS_UNDEFINED, 
-									width, 
-									height, 
+									self.width, 
+									self.height, 
 									sdl.WINDOW_SHOWN);
-		self.ren = sdl.CreateRenderer(self.win, -1, sdl.RENDERER_SOFTWARE);
-		
-		if self.win == nil or self.ren == nil then
-			return false
-		else
-			return true
-		end
-	else
+	if self.win == nil then
+		print(sdl.GetError())
 		return false
 	end
+	
+	self.ren = self.ren or sdl.CreateRenderer(self.win, -1, sdl.RENDERER_SOFTWARE);
+	
+	if self.ren == nil then
+		print(sdl.GetError())
+		return false
+	end
+	
+	return true
 end
 
 
 -- Run game
-function Game:start()
+function Game:execute()
+	local counter = sdl.CreateCounter()
 	while true do
 		local event = sdl.PollEvent()
 		if event == nil then
@@ -43,15 +44,17 @@ function Game:start()
 			end
 		end
 		
-		sdl.SetRenderDrawColor(self.ren, 0, 0, 0, 0)
-		sdl.RenderClear(self.ren)
-		if self.draw ~= nil then
-			self.draw(self.ren)
-		end
-		sdl.RenderPresent(self.ren)
-		
-		if self.update ~= nil then
-			self.update()
+		if counter:time(math.ceil(1000/60)) then
+			sdl.SetRenderDrawColor(self.ren, 0, 0, 0, 0)
+			sdl.RenderClear(self.ren)
+			if self.draw ~= nil then
+				self.draw(self.ren)
+			end
+			sdl.RenderPresent(self.ren)
+			
+			if self.update ~= nil then
+				self.update()
+			end
 		end
 	end
 end
@@ -84,6 +87,10 @@ end
 -- Setting deal event funtion
 function Game:setDealEvent(callback)
 	self.dealEvent = callback
+end
+
+function Game:window()
+	return self.win
 end
 
 return Game
