@@ -31,7 +31,7 @@ end
 
 function Chunk:fill()
 	math.randomseed(os.time())
-	for y = 1,1 do
+	for y = 1,10 do
 		for x = 1,10 do
 			self:add(x, y, math.random(0,255), math.random(0,255), math.random(0,255))
 		end
