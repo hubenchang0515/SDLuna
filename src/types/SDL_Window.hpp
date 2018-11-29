@@ -1,15 +1,21 @@
 #ifndef SDLUNA_WINDOW_H
 #define SDLUNA_WINDOW_H
 
-#define SDLUNA_WINDOW_GC "SDLUNA_WINDOW_GC"
-inline int CreateWindowGC(lua_State* L);
+#include <luaMagic/luaMagic.hpp>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+
+#define UDATA_SDL_WINDOW "Window"
+inline int CreateWindowMetatable(lua_State* L);
 
 /* Write SDL_Window* to Lua */
 template<> 
 inline void luaMagic_write(lua_State* L, SDL_Window* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateWindowGC(L);
+	static int gc = CreateWindowMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -21,7 +27,7 @@ inline void luaMagic_write(lua_State* L, SDL_Window* value)
 		*ptr = value;
 		
 		/* Set __gc meta-method */
-		lua_getfield(L, LUA_REGISTRYINDEX, SDLUNA_WINDOW_GC);
+		lua_getfield(L, LUA_REGISTRYINDEX, UDATA_SDL_WINDOW);
 		lua_setmetatable(L, -2);
 	}
 }
@@ -30,32 +36,39 @@ inline void luaMagic_write(lua_State* L, SDL_Window* value)
 template<>
 inline SDL_Window* luaMagic_read<SDL_Window*>(lua_State* L, int index)
 {
-	if(lua_isnoneornil(L, index))
+	if(luaL_checkudata(L, index, UDATA_SDL_WINDOW))
 	{
-		luaL_error(L, "bad argument #%d (SDL_Window* expected, got nil)", index);
-		return nullptr;
+		return *static_cast<SDL_Window**>(lua_touserdata(L, index));
 	}
 	else
 	{
-		return *static_cast<SDL_Window**>(lua_touserdata(L, index));
+		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
+					index, UDATA_SDL_WINDOW, luaL_typename(L, index));
+		return nullptr;
 	}
 }
 
 
-/* Create a meta-table whit __gc meta-method to recycle SDL_Window* */
-inline int CreateWindowGC(lua_State* L)
+/* Create a meta-table */
+inline int CreateWindowMetatable(lua_State* L)
 {
-	lua_newtable(L);
+	// create metatable with __name = UDATA_SDL_WINDOW
+	luaL_newmetatable(L, UDATA_SDL_WINDOW);
+	
+	// __gc meta-method to recycle SDL_Window
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		SDL_Window* ptr = *static_cast<SDL_Window**>(lua_touserdata(L, 1));
-		// #ifdef SDLUNA_DEBUG
-		// 	SDL_Log("GC : SDL_DestroyWindow(%p)", ptr);
-		// #endif
 		SDL_DestroyWindow(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
-	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_WINDOW_GC);
+	
+	// __tostring meta-method to print
+	lua_pushcfunction(L, [](lua_State* L)->int{
+		SDL_Window* ptr = *static_cast<SDL_Window**>(lua_touserdata(L, 1));
+		lua_pushfstring(L, "%s : %p", UDATA_SDL_WINDOW, ptr);
+		return 1;
+	});
 
 	return 0;
 }

@@ -1,15 +1,21 @@
 #ifndef SDLUNA_RENDERER_H
 #define SDLUNA_RENDERER_H
 
-#define SDLUNA_RENDERER_GC "SDLUNA_RENDERER_GC"
-inline int CreateRendererGC(lua_State* L);
+#include <luaMagic/luaMagic.hpp>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+
+#define UDATA_SDL_RENDERER "Renderer"
+inline int CreateRendererMetatable(lua_State* L);
 
 /* Write SDL_Renderer* to Lua */
 template<> 
 inline void luaMagic_write(lua_State* L, SDL_Renderer* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateRendererGC(L);
+	static int gc = CreateRendererMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -21,7 +27,7 @@ inline void luaMagic_write(lua_State* L, SDL_Renderer* value)
 		*ptr = value;
 		
 		/* Set __gc meta-method */
-		lua_getfield(L, LUA_REGISTRYINDEX, SDLUNA_RENDERER_GC);
+		lua_getfield(L, LUA_REGISTRYINDEX, UDATA_SDL_RENDERER);
 		lua_setmetatable(L, -2);
 	}
 }
@@ -30,32 +36,39 @@ inline void luaMagic_write(lua_State* L, SDL_Renderer* value)
 template<>
 inline SDL_Renderer* luaMagic_read<SDL_Renderer*>(lua_State* L, int index)
 {
-	if(lua_isnoneornil(L, index))
+	if(luaL_checkudata(L, index, UDATA_SDL_RENDERER))
 	{
-		luaL_error(L, "bad argument #%d (SDL_Renderer* expected, got nil)", index);
-		return nullptr;
+		return *static_cast<SDL_Renderer**>(lua_touserdata(L, index));
 	}
 	else
 	{
-		return *static_cast<SDL_Renderer**>(lua_touserdata(L, index));
+		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
+					index, UDATA_SDL_RENDERER, luaL_typename(L, index));
+		return nullptr;
 	}
 }
 
 
-/* Create a meta-table whit __gc meta-method to recycle SDL_Renderer* */
-inline int CreateRendererGC(lua_State* L)
+/* Create a meta-table */
+inline int CreateRendererMetatable(lua_State* L)
 {
-	lua_newtable(L);
+	// create metatable with __name = UDATA_SDL_RENDERER
+	luaL_newmetatable(L, UDATA_SDL_RENDERER);
+	
+	// __gc meta-method to recycle SDL_Renderer
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		SDL_Renderer* ptr = *static_cast<SDL_Renderer**>(lua_touserdata(L, 1));
-		// #ifdef SDLUNA_DEBUG
-		// 	SDL_Log("GC : SDL_DestroyRenderer(%p)", ptr);
-		// #endif
 		SDL_DestroyRenderer(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
-	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_RENDERER_GC);
+	
+	// __tostring meta-method to print
+	lua_pushcfunction(L, [](lua_State* L)->int{
+		SDL_Renderer* ptr = *static_cast<SDL_Renderer**>(lua_touserdata(L, 1));
+		lua_pushfstring(L, "%s : %p", UDATA_SDL_RENDERER, ptr);
+		return 1;
+	});
 
 	return 0;
 }

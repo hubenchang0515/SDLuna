@@ -1,15 +1,21 @@
 #ifndef SDLUNA_FONT_H
 #define SDLUNA_FONT_H
 
-#define SDLUNA_FONT_GC "SDLUNA_FONT_GC"
-inline int CreateFontGC(lua_State* L);
+#include <luaMagic/luaMagic.hpp>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+
+#define UDATA_TTF_FONT "Font"
+inline int CreateFontMetatable(lua_State* L);
 
 /* Write TTF_Font* to Lua */
 template<> 
 inline void luaMagic_write(lua_State* L, TTF_Font* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateFontGC(L);
+	static int gc = CreateFontMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -21,7 +27,7 @@ inline void luaMagic_write(lua_State* L, TTF_Font* value)
 		*ptr = value;
 		
 		/* Set __gc meta-method */
-		lua_getfield(L, LUA_REGISTRYINDEX, SDLUNA_FONT_GC);
+		lua_getfield(L, LUA_REGISTRYINDEX, UDATA_TTF_FONT);
 		lua_setmetatable(L, -2);
 	}
 }
@@ -30,32 +36,39 @@ inline void luaMagic_write(lua_State* L, TTF_Font* value)
 template<>
 inline TTF_Font* luaMagic_read<TTF_Font*>(lua_State* L, int index)
 {
-	if(lua_isnoneornil(L, index))
+	if(luaL_checkudata(L, index, UDATA_TTF_FONT))
 	{
-		luaL_error(L, "bad argument #%d (TTF_Font* expected, got nil)", index);
-		return nullptr;
+		return *static_cast<TTF_Font**>(lua_touserdata(L, index));
 	}
 	else
 	{
-		return *static_cast<TTF_Font**>(lua_touserdata(L, index));
+		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
+					index, UDATA_TTF_FONT, luaL_typename(L, index));
+		return nullptr;
 	}
 }
 
 
-/* Create a meta-table whit __gc meta-method to recycle TTF_Font* */
-inline int CreateFontGC(lua_State* L)
+/* Create a meta-table */
+inline int CreateFontMetatable(lua_State* L)
 {
-	lua_newtable(L);
+	// create metatable with __name = UDATA_TTF_FONT
+	luaL_newmetatable(L, UDATA_TTF_FONT);
+	
+	// __gc meta-method to recycle TTF_Font
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		TTF_Font* ptr = *static_cast<TTF_Font**>(lua_touserdata(L, 1));
-		// #ifdef SDLUNA_DEBUG
-		// 	SDL_Log("GC : TTF_CloseFont(%p)", ptr);
-		// #endif
 		TTF_CloseFont(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
-	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_FONT_GC);
+	
+	// __tostring meta-method to print
+	lua_pushcfunction(L, [](lua_State* L)->int{
+		TTF_Font* ptr = *static_cast<TTF_Font**>(lua_touserdata(L, 1));
+		lua_pushfstring(L, "%s : %p", UDATA_TTF_FONT, ptr);
+		return 1;
+	});
 
 	return 0;
 }

@@ -1,15 +1,21 @@
 #ifndef SDLUNA_MUSIC_H
 #define SDLUNA_MUSIC_H
 
-#define SDLUNA_MUSIC_GC "SDLUNA_MUSIC_GC"
-inline int CreateMusicGC(lua_State* L);
+#include <luaMagic/luaMagic.hpp>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+
+#define UDATA_MIX_MUSIC "Music"
+inline int CreateMusicMetatable(lua_State* L);
 
 /* Write Mix_Music* to Lua */
 template<> 
 inline void luaMagic_write(lua_State* L, Mix_Music* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateMusicGC(L);
+	static int gc = CreateMusicMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -21,7 +27,7 @@ inline void luaMagic_write(lua_State* L, Mix_Music* value)
 		*ptr = value;
 		
 		/* Set __gc meta-method */
-		lua_getfield(L, LUA_REGISTRYINDEX, SDLUNA_MUSIC_GC);
+		lua_getfield(L, LUA_REGISTRYINDEX, UDATA_MIX_MUSIC);
 		lua_setmetatable(L, -2);
 	}
 }
@@ -30,32 +36,39 @@ inline void luaMagic_write(lua_State* L, Mix_Music* value)
 template<>
 inline Mix_Music* luaMagic_read<Mix_Music*>(lua_State* L, int index)
 {
-	if(lua_isnoneornil(L, index))
+	if(luaL_checkudata(L, index, UDATA_MIX_MUSIC))
 	{
-		luaL_error(L, "bad argument #%d (Mix_Music* expected, got nil)", index);
-		return nullptr;
+		return *static_cast<Mix_Music**>(lua_touserdata(L, index));
 	}
 	else
 	{
-		return *static_cast<Mix_Music**>(lua_touserdata(L, index));
+		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
+					index, UDATA_MIX_MUSIC, luaL_typename(L, index));
+		return nullptr;
 	}
 }
 
 
-/* Create a meta-table whit __gc meta-method to recycle Mix_Music* */
-inline int CreateMusicGC(lua_State* L)
+/* Create a meta-table */
+inline int CreateMusicMetatable(lua_State* L)
 {
-	lua_newtable(L);
+	// create metatable with __name = UDATA_MIX_MUSIC
+	luaL_newmetatable(L, UDATA_MIX_MUSIC);
+	
+	// __gc meta-method to recycle Mix_Music
 	lua_pushcfunction(L, [](lua_State* L)->int{
 		Mix_Music* ptr = *static_cast<Mix_Music**>(lua_touserdata(L, 1));
-		// #ifdef SDLUNA_DEBUG
-		// 	SDL_Log("GC : Mix_FreeMusic(%p)", ptr);
-		// #endif
 		Mix_FreeMusic(ptr);
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
-	lua_setfield(L, LUA_REGISTRYINDEX, SDLUNA_MUSIC_GC);
+	
+	// __tostring meta-method to print
+	lua_pushcfunction(L, [](lua_State* L)->int{
+		Mix_Music* ptr = *static_cast<Mix_Music**>(lua_touserdata(L, 1));
+		lua_pushfstring(L, "%s : %p", UDATA_MIX_MUSIC, ptr);
+		return 1;
+	});
 
 	return 0;
 }
