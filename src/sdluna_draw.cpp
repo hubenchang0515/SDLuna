@@ -38,12 +38,12 @@ static int SetColor(void* userdata, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 
 static int Circle(SDL_Renderer* renderer, int x, int y, int r)
 {
-	return HB_Circle(static_cast<void*>(renderer), x, y, r);
+	return HB_Ellipse(static_cast<void*>(renderer), x, y, r, r);
 }
 
 static int FillCircle(SDL_Renderer* renderer, int x, int y, int r)
 {
-	return HB_FillCircle(static_cast<void*>(renderer), x, y, r);
+	return HB_FillEllipse(static_cast<void*>(renderer), x, y, r, r);
 }
 
 static int Triangle(SDL_Renderer* renderer, int x1, int y1, int x2, int y2, int x3, int y3)
