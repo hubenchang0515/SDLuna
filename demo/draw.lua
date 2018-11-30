@@ -4,7 +4,7 @@ local window = sdl.CreateWindow("Timer",
 								sdl.WINDOWPOS_UNDEFINED,
 								600, 400, 
 								sdl.WINDOW_SHOWN)
-local renderer = sdl.CreateRenderer(window, -1, sdl.RENDERER_ACCELERATED)
+local renderer = sdl.CreateRenderer(window, -1, sdl.RENDERER_SOFTWARE)
 
 math.randomseed(os.time())
 local counter1 = sdl.CreateCounter()

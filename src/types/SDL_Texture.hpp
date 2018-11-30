@@ -36,16 +36,7 @@ inline void luaMagic_write(lua_State* L, SDL_Texture* value)
 template<>
 inline SDL_Texture* luaMagic_read<SDL_Texture*>(lua_State* L, int index)
 {
-	if(luaL_checkudata(L, index, UDATA_SDL_TEXTURE))
-	{
-		return *static_cast<SDL_Texture**>(lua_touserdata(L, index));
-	}
-	else
-	{
-		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
-					index, UDATA_SDL_TEXTURE, luaL_typename(L, index));
-		return nullptr;
-	}
+	return *static_cast<SDL_Texture**>(luaL_checkudata(L, index, UDATA_SDL_TEXTURE));
 }
 
 

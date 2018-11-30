@@ -36,16 +36,7 @@ inline void luaMagic_write(lua_State* L, Mix_Music* value)
 template<>
 inline Mix_Music* luaMagic_read<Mix_Music*>(lua_State* L, int index)
 {
-	if(luaL_checkudata(L, index, UDATA_MIX_MUSIC))
-	{
-		return *static_cast<Mix_Music**>(lua_touserdata(L, index));
-	}
-	else
-	{
-		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
-					index, UDATA_MIX_MUSIC, luaL_typename(L, index));
-		return nullptr;
-	}
+		return *static_cast<Mix_Music**>(luaL_checkudata(L, index, UDATA_MIX_MUSIC));
 }
 
 

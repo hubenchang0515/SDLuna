@@ -36,16 +36,7 @@ inline void luaMagic_write(lua_State* L, TTF_Font* value)
 template<>
 inline TTF_Font* luaMagic_read<TTF_Font*>(lua_State* L, int index)
 {
-	if(luaL_checkudata(L, index, UDATA_TTF_FONT))
-	{
-		return *static_cast<TTF_Font**>(lua_touserdata(L, index));
-	}
-	else
-	{
-		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
-					index, UDATA_TTF_FONT, luaL_typename(L, index));
-		return nullptr;
-	}
+	return *static_cast<TTF_Font**>(luaL_checkudata(L, index, UDATA_TTF_FONT));
 }
 
 

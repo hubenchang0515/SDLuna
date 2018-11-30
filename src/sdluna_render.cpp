@@ -1,5 +1,7 @@
 #include "sdluna.hpp"
 
+static int SDLuna_SetRenderTarget(lua_State* L);
+
 /* Bind Functions */
 void SDLuna_RenderBind(lua_State* L)
 {
@@ -50,7 +52,7 @@ void SDLuna_RenderBind(lua_State* L)
 	luaMagic::bind(L, "RenderTargetSupported", SDL_RenderTargetSupported, true);
 	//luaMagic::bind(L, "SetRenderDrawBlendMode", SDL_SetRenderDrawBlendMode, true);
 	luaMagic::bind(L, "SetRenderDrawColor", SDL_SetRenderDrawColor, true);
-	luaMagic::bind(L, "SetRenderTarget", SDL_SetRenderTarget, true);
+	//luaMagic::bind(L, "SetRenderTarget", SDL_SetRenderTarget, true);
 	luaMagic::bind(L, "SetTextureAlphaMod", SDL_SetTextureAlphaMod, true);
 	//luaMagic::bind(L, "SetTextureBlendMode", SDL_SetTextureBlendMode, true);
 	luaMagic::bind(L, "SetTextureColorMod", SDL_SetTextureColorMod, true);
@@ -73,4 +75,38 @@ void SDLuna_RenderBind(lua_State* L)
 	luaMagic::setValue(L, "TEXTUREACCESS_STATIC", (int)SDL_TEXTUREACCESS_STATIC, true);
 	luaMagic::setValue(L, "TEXTUREACCESS_STREAMING", (int)SDL_TEXTUREACCESS_STREAMING, true);
 	luaMagic::setValue(L, "TEXTUREACCESS_TARGET", (int)SDL_TEXTUREACCESS_TARGET, true);
+	
+	/* special handling */
+	lua_pushcfunction(L, SDLuna_SetRenderTarget);
+	lua_setfield(L, -2, "SetRenderTarget");
+}
+
+/* special handling */
+static int SDLuna_SetRenderTarget(lua_State* L)
+{
+	SDL_Renderer* renderer = nullptr;
+	SDL_Texture* texture = nullptr;
+	if(luaL_checkudata(L, 1, UDATA_SDL_RENDERER))
+	{
+		renderer = *static_cast<SDL_Renderer**>(lua_touserdata(L, 1));
+	}
+	else
+	{
+		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
+					1, UDATA_SDL_RENDERER, luaL_typename(L, 1));
+		return 0;
+	}
+	
+	/* <texture> accept not only SDL_Texture* but also nil */
+	if(lua_isnoneornil(L, 2))
+	{
+		texture = nullptr;
+	}
+	else
+	{
+		texture = *static_cast<SDL_Texture**>(luaL_checkudata(L, 2, UDATA_SDL_TEXTURE));
+	}
+	
+	lua_pushinteger(L, SDL_SetRenderTarget(renderer, texture));
+	return 1;
 }

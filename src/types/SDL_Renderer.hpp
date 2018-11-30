@@ -36,16 +36,7 @@ inline void luaMagic_write(lua_State* L, SDL_Renderer* value)
 template<>
 inline SDL_Renderer* luaMagic_read<SDL_Renderer*>(lua_State* L, int index)
 {
-	if(luaL_checkudata(L, index, UDATA_SDL_RENDERER))
-	{
-		return *static_cast<SDL_Renderer**>(lua_touserdata(L, index));
-	}
-	else
-	{
-		luaL_error(L, "bad argument #%d (%s expected, got %s)", 
-					index, UDATA_SDL_RENDERER, luaL_typename(L, index));
-		return nullptr;
-	}
+	return *static_cast<SDL_Renderer**>(luaL_checkudata(L, index, UDATA_SDL_RENDERER));
 }
 
 
