@@ -15,7 +15,7 @@ template<>
 inline void luaMagic_write(lua_State* L, Mix_Music* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateMusicMetatable(L);
+	CreateMusicMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -44,16 +44,16 @@ inline Mix_Music* luaMagic_read<Mix_Music*>(lua_State* L, int index)
 inline int CreateMusicMetatable(lua_State* L)
 {
 	// create metatable with __name = UDATA_MIX_MUSIC
-	luaL_newmetatable(L, UDATA_MIX_MUSIC);
-	
-	// __gc meta-method to recycle Mix_Music
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		Mix_Music* ptr = *static_cast<Mix_Music**>(lua_touserdata(L, 1));
-		Mix_FreeMusic(ptr);
-		return 0;
-	});
-	lua_setfield(L, -2, "__gc");
-
+	if(luaL_newmetatable(L, UDATA_MIX_MUSIC))
+	{
+		// __gc meta-method to recycle Mix_Music
+		lua_pushcfunction(L, [](lua_State* L)->int{
+			Mix_Music* ptr = *static_cast<Mix_Music**>(lua_touserdata(L, 1));
+			Mix_FreeMusic(ptr);
+			return 0;
+		});
+		lua_setfield(L, -2, "__gc");
+	}
 	return 0;
 }
 

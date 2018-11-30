@@ -15,7 +15,7 @@ template<>
 inline void luaMagic_write(lua_State* L, SDL_Renderer* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateRendererMetatable(L);
+	CreateRendererMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -44,16 +44,16 @@ inline SDL_Renderer* luaMagic_read<SDL_Renderer*>(lua_State* L, int index)
 inline int CreateRendererMetatable(lua_State* L)
 {
 	// create metatable with __name = UDATA_SDL_RENDERER
-	luaL_newmetatable(L, UDATA_SDL_RENDERER);
-	
-	// __gc meta-method to recycle SDL_Renderer
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		SDL_Renderer* ptr = *static_cast<SDL_Renderer**>(lua_touserdata(L, 1));
-		SDL_DestroyRenderer(ptr);
-		return 0;
-	});
-	lua_setfield(L, -2, "__gc");
-
+	if(luaL_newmetatable(L, UDATA_SDL_RENDERER))
+	{
+		// __gc meta-method to recycle SDL_Renderer
+		lua_pushcfunction(L, [](lua_State* L)->int{
+			SDL_Renderer* ptr = *static_cast<SDL_Renderer**>(lua_touserdata(L, 1));
+			SDL_DestroyRenderer(ptr);
+			return 0;
+		});
+		lua_setfield(L, -2, "__gc");
+	}
 	return 0;
 }
 

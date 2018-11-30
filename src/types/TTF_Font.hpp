@@ -15,7 +15,7 @@ template<>
 inline void luaMagic_write(lua_State* L, TTF_Font* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateFontMetatable(L);
+	CreateFontMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -44,16 +44,16 @@ inline TTF_Font* luaMagic_read<TTF_Font*>(lua_State* L, int index)
 inline int CreateFontMetatable(lua_State* L)
 {
 	// create metatable with __name = UDATA_TTF_FONT
-	luaL_newmetatable(L, UDATA_TTF_FONT);
-	
-	// __gc meta-method to recycle TTF_Font
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		TTF_Font* ptr = *static_cast<TTF_Font**>(lua_touserdata(L, 1));
-		TTF_CloseFont(ptr);
-		return 0;
-	});
-	lua_setfield(L, -2, "__gc");
-
+	if(luaL_newmetatable(L, UDATA_TTF_FONT))
+	{
+		// __gc meta-method to recycle TTF_Font
+		lua_pushcfunction(L, [](lua_State* L)->int{
+			TTF_Font* ptr = *static_cast<TTF_Font**>(lua_touserdata(L, 1));
+			TTF_CloseFont(ptr);
+			return 0;
+		});
+		lua_setfield(L, -2, "__gc");
+	}
 	return 0;
 }
 

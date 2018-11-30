@@ -15,7 +15,7 @@ template<>
 inline void luaMagic_write(lua_State* L, SDL_Texture* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateTextureMetatable(L);
+	CreateTextureMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -44,16 +44,16 @@ inline SDL_Texture* luaMagic_read<SDL_Texture*>(lua_State* L, int index)
 inline int CreateTextureMetatable(lua_State* L)
 {
 	// create metatable with __name = UDATA_SDL_TEXTURE
-	luaL_newmetatable(L, UDATA_SDL_TEXTURE);
-	
-	// __gc meta-method to recycle SDL_Texture
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		SDL_Texture* ptr = *static_cast<SDL_Texture**>(lua_touserdata(L, 1));
-		SDL_DestroyTexture(ptr);
-		return 0;
-	});
-	lua_setfield(L, -2, "__gc");
-
+	if(luaL_newmetatable(L, UDATA_SDL_TEXTURE))
+	{
+		// __gc meta-method to recycle SDL_Texture
+		lua_pushcfunction(L, [](lua_State* L)->int{
+			SDL_Texture* ptr = *static_cast<SDL_Texture**>(lua_touserdata(L, 1));
+			SDL_DestroyTexture(ptr);
+			return 0;
+		});
+		lua_setfield(L, -2, "__gc");
+	}
 	return 0;
 }
 

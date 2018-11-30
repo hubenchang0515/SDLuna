@@ -15,7 +15,7 @@ template<>
 inline void luaMagic_write(lua_State* L, SDL_Window* value)
 {	
 	/* Create GC meta-table only once */
-	static int gc = CreateWindowMetatable(L);
+	CreateWindowMetatable(L);
 
 	if(value == nullptr)
 	{
@@ -44,16 +44,16 @@ inline SDL_Window* luaMagic_read<SDL_Window*>(lua_State* L, int index)
 inline int CreateWindowMetatable(lua_State* L)
 {
 	// create metatable with __name = UDATA_SDL_WINDOW
-	luaL_newmetatable(L, UDATA_SDL_WINDOW);
-	
-	// __gc meta-method to recycle SDL_Window
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		SDL_Window* ptr = *static_cast<SDL_Window**>(lua_touserdata(L, 1));
-		SDL_DestroyWindow(ptr);
-		return 0;
-	});
-	lua_setfield(L, -2, "__gc");
-
+	if(luaL_newmetatable(L, UDATA_SDL_WINDOW))
+	{
+		// __gc meta-method to recycle SDL_Window
+		lua_pushcfunction(L, [](lua_State* L)->int{
+			SDL_Window* ptr = *static_cast<SDL_Window**>(lua_touserdata(L, 1));
+			SDL_DestroyWindow(ptr);
+			return 0;
+		});
+		lua_setfield(L, -2, "__gc");
+	}
 	return 0;
 }
 
