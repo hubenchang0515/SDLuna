@@ -53,13 +53,6 @@ inline int CreateMusicMetatable(lua_State* L)
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
-	
-	// __tostring meta-method to print
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		Mix_Music* ptr = *static_cast<Mix_Music**>(lua_touserdata(L, 1));
-		lua_pushfstring(L, "%s : %p", UDATA_MIX_MUSIC, ptr);
-		return 1;
-	});
 
 	return 0;
 }

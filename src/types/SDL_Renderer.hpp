@@ -53,13 +53,6 @@ inline int CreateRendererMetatable(lua_State* L)
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
-	
-	// __tostring meta-method to print
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		SDL_Renderer* ptr = *static_cast<SDL_Renderer**>(lua_touserdata(L, 1));
-		lua_pushfstring(L, "%s : %p", UDATA_SDL_RENDERER, ptr);
-		return 1;
-	});
 
 	return 0;
 }

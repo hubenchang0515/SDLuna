@@ -53,13 +53,6 @@ inline int CreateTextureMetatable(lua_State* L)
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
-	
-	// __tostring meta-method to print
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		SDL_Texture* ptr = *static_cast<SDL_Texture**>(lua_touserdata(L, 1));
-		lua_pushfstring(L, "%s : %p", UDATA_SDL_TEXTURE, ptr);
-		return 1;
-	});
 
 	return 0;
 }

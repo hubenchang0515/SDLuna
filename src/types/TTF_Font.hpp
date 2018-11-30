@@ -53,13 +53,6 @@ inline int CreateFontMetatable(lua_State* L)
 		return 0;
 	});
 	lua_setfield(L, -2, "__gc");
-	
-	// __tostring meta-method to print
-	lua_pushcfunction(L, [](lua_State* L)->int{
-		TTF_Font* ptr = *static_cast<TTF_Font**>(lua_touserdata(L, 1));
-		lua_pushfstring(L, "%s : %p", UDATA_TTF_FONT, ptr);
-		return 1;
-	});
 
 	return 0;
 }
