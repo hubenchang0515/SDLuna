@@ -12,7 +12,7 @@ end
 
 function Ball:draw(renderer)
 	sdl.SetRenderDrawColor(renderer, 0xe9,0x1e,0x63,0)
-	sdl.FillCircle(renderer, self._x, self._y, self._r, self._r)
+	sdl.FillCircle(renderer, self._x, self._y, self._r)
 end
 
 function Ball:update(xWin, yWin, racket, win)
