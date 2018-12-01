@@ -54,6 +54,41 @@ inline int CreateTextureMetatable(lua_State* L)
 		});
 		lua_setfield(L, -2, "__gc");
 	}
+
+	// __index meta-method to read property
+	lua_pushcfunction(L, [](lua_State* L)->int{
+		SDL_Texture* texture = luaMagic_read<SDL_Texture*>(L, 1);
+		const char* index = luaMagic_read<const char*>(L, 2);
+		Uint32 format = SDL_PIXELFORMAT_UNKNOWN;
+		int access = -1;
+		int w = -1;
+		int h = -1;
+		SDL_QueryTexture(texture, &format, &access, &w, &h);
+		if(strcmp(index, "format") == 0)
+		{
+			luaMagic_write(L, format);
+		}
+		else if(strcmp(index, "access") == 0)
+		{
+			luaMagic_write(L, access);
+		}
+		else if(strcmp(index, "width") == 0)
+		{
+			luaMagic_write(L, w);
+		}
+		else if(strcmp(index, "height") == 0)
+		{
+			luaMagic_write(L, h);
+		}
+		else
+		{
+			lua_pushnil(L);
+		}
+
+		return 1;
+	});
+	lua_setfield(L, -2, "__index");
+
 	return 0;
 }
 

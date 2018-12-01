@@ -53,7 +53,32 @@ inline int CreateWindowMetatable(lua_State* L)
 			return 0;
 		});
 		lua_setfield(L, -2, "__gc");
+
+		// __index meta-method to read property
+		lua_pushcfunction(L, [](lua_State* L)->int{
+			SDL_Window* window = luaMagic_read<SDL_Window*>(L, 1);
+			const char* index = luaMagic_read<const char*>(L, 2);
+			int w = -1;
+			int h = -1;
+			SDL_GetWindowSize(window, &w, &h);
+			if(strcmp(index, "width") == 0)
+			{
+				luaMagic_write(L, w);
+			}
+			else if(strcmp(index, "height") == 0)
+			{
+				luaMagic_write(L, h);
+			}
+			else
+			{
+				lua_pushnil(L);
+			}
+
+			return 1;
+		});
 	}
+	lua_setfield(L, -2, "__index");
+
 	return 0;
 }
 
