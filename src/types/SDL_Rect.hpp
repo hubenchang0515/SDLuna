@@ -1,6 +1,12 @@
 #ifndef SDLUNA_SDL_RECT_H
 #define SDLUNA_SDL_RECT_H
 
+#include <luaMagic/luaMagic.hpp>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+
 /* Write SDL_Rect* to Lua */
 template<> 
 inline void luaMagic_write(lua_State* L, SDL_Rect* value)

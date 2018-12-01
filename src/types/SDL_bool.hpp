@@ -1,6 +1,12 @@
 #ifndef SDLUNA_SDL_BOOL_H
 #define SDLUNA_SDL_BOOL_H
 
+#include <luaMagic/luaMagic.hpp>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+
 /* Write SDL_bool to Lua */
 template<> 
 inline void luaMagic_write(lua_State* L, SDL_bool value)

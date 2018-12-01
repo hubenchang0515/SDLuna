@@ -1,6 +1,12 @@
 #ifndef SDLUNA_SDL_EVENT_H
 #define SDLUNA_SDL_EVENT_H
 
+#include <luaMagic/luaMagic.hpp>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+
 static void SDLuna_PushKey(lua_State* L, SDL_Keycode key);
 static void SDLuna_PushMouseButto(lua_State* L, Uint8 mouse);
 
