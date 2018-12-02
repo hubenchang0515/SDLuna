@@ -1,4 +1,7 @@
 # Timer
+Check time. 
+
+# Method
 * [CreateCounter](#CreateCounter)``()``
 
 ## CreateCounter

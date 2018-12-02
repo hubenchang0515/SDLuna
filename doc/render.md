@@ -1,4 +1,13 @@
 # Renderer
+Render widnow and texture.
+
+## Type
+* Renderer
+* Texture
+  * ``Texture.width``  -- width of Texture , read-only property  
+  * ``Texture.height``  -- height of Texture , read-only property  
+
+## Method
 * [CreateRenderer](#CreateRenderer)``(window, index, flag)``  
 * [CreateTexture](#CreateTexture)``(renderer, format, access, width, height)`` 
 * [SetRenderTarget](#SetRenderTarget)``(renderer, texture)`` 

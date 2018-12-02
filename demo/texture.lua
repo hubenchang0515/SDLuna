@@ -2,11 +2,12 @@ local sdl = require("libsdluna")
 local window = sdl.CreateWindow("SDLuna", 
 								sdl.WINDOWPOS_UNDEFINED, 
 								sdl.WINDOWPOS_UNDEFINED,
-								300, 300,
+								200, 200,
 								sdl.WINDOW_SHOWN)
 local renderer = sdl.CreateRenderer(window, -1, sdl.RENDERER_ACCELERATED)
 local texture = sdl.LoadImage(renderer, "logo.png")
-
+sdl.SetRenderTarget(renderer, texture)
+print(sdl.GetError())
 while true do
 	local event = sdl.PollEvent()
 	if event ~= nil and event.type == sdl.EVENT_QUIT then

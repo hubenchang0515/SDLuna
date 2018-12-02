@@ -7,7 +7,13 @@ Alpha 1.0
 ## Get Start
 * Load SDLuna
 ```Lua
+-- require sdluna
 local sdl = require("libsdluna")
+
+-- if require failed , print error message
+if type(sdl) == "string" then
+    print(sdl)
+end
 ```
 
 * Create a window
@@ -40,7 +46,9 @@ while true do
     sdl.SetRenderDrawColor(renderer, 0,0,0,0)
     sdl.RenderClear(renderer)
     
-    -- Your codes
+    --[[
+        Your codes 
+    --]]
 
     -- update window 
     sdl.RenderPresent(renderer)
@@ -55,3 +63,4 @@ end
  - [x] [Event](event.md)
  - [x] [Keyboard](keyboard.md)
  - [x] [Timer](timer.md)
+ - [x] [Font](font.md)

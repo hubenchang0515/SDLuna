@@ -1,4 +1,7 @@
 # Event
+Deal event.
+
+# Method
 * [PollEvent](#PollEvent)``()``
 
 ## PollEvent

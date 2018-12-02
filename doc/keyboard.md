@@ -1,4 +1,8 @@
 # Keyboard
+Check keyboard state.
+
+# Method
+* [KeyPressed](#KeyPressed)``(key)``
 
 ## KeyPressed
 ``KeyPressed(key)``  

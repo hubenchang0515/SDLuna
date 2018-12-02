@@ -1,4 +1,12 @@
 # Window
+Create and control Window.
+
+# Type
+* Window
+  * ``Window.width`` -- width of Window , read-only property
+  * ``Window.height`` -- height of Window , read-only property
+
+# Method
 * [CreateWindow](#CreateWindow)``(title, x, y, width, height, flag)``  
 * [HideWindow](#HideWindow)``(window)``   
 * [ShowWindow](#ShowWindow)``(window)``  

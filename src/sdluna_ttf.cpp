@@ -19,7 +19,8 @@ SDL_Texture* SDLuna_RenderText(SDL_Renderer* renderer, TTF_Font *font, const cha
 	SDL_GetRenderDrawColor(renderer, &(color.r), &(color.g), &(color.b), &(color.a));
 	SDL_Surface* surface = TTF_RenderText_Blended(font, text, color);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surface);
-	
+	SDL_FreeSurface(surface);
+
 	return texture;
 }
 
@@ -30,6 +31,8 @@ SDL_Texture* SDLuna_RenderUTF8(SDL_Renderer* renderer, TTF_Font *font, const cha
 	SDL_GetRenderDrawColor(renderer, &(color.r), &(color.g), &(color.b), &(color.a));
 	SDL_Surface* surface = TTF_RenderUTF8_Blended(font, text, color);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surface);
+	SDL_FreeSurface(surface);
+
 	return texture;
 }
 
@@ -39,6 +42,7 @@ SDL_Texture* SDLuna_RenderUnicode(SDL_Renderer* renderer, TTF_Font *font, const 
 	SDL_GetRenderDrawColor(renderer, &(color.r), &(color.g), &(color.b), &(color.a));
 	SDL_Surface* surface = TTF_RenderUNICODE_Blended(font, text, color);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surface);
+	SDL_FreeSurface(surface);
 	
 	return texture;
 }

@@ -1,5 +1,7 @@
 # Draw
+Draw basic geometric figure.
 
+# Method
 * [Point](#Point)``(renderer, x, y)`` 
 * [Line](#Line)``(renderer, x1, y1, x2, y2)``
 * [Rect](#Rect)``(renderer, rect)``

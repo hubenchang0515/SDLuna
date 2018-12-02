@@ -1,4 +1,10 @@
 # Sound
+Play sound.
+
+# Type
+* Music
+
+# Method
 * [LoadMusic](#LoadMusic)``(file)``
 * [PlayMusic](#PlayMusic)``(music, loop)``  
 * [PauseMusic](#PauseMusic)``()``  
