@@ -5,7 +5,7 @@ A SDL2 bind for Lua
 Alpha 1.0
 
 ## Get Start
-* Load SDLuna
+* Require SDLuna
 ```Lua
 -- require sdluna
 local sdl = require("libsdluna")
