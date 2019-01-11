@@ -1,5 +1,5 @@
-# Sound
-Play sound.
+# Font
+Display text.
 
 # Type
 * Font
