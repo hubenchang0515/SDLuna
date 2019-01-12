@@ -12,7 +12,7 @@ make
 * MinGW may need type ``cmake -G"MinGW Makefiles" .``
 * Windows may need type `lua install.lua`
 * Linux may need use ``chmod`` and ``sudo`` 
-* If you meet ``/usr/bin/ld: /usr/local/lib/liblua.a : can not be used when making a shared object; recompile with -fPIC`` in Linux, just do like this:
+* If you meet ``/usr/bin/ld: /usr/local/lib/liblua.a : can not be used when making a shared object; recompile with -fPIC`` in Linux, just compile Lua like this:
 ```bash
 cd $LUA_SRC
 gcc -c -std=c99 -O2 -fPIC *.c
